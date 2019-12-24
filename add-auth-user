@@ -1,0 +1,29 @@
+#!/usr/bin/env perl
+use Mojolicious::Lite;
+
+use lib 'lib';
+use AuthHelper::Schema;
+use DateTime;
+use Mojolicious::Plugin::Bcrypt;
+
+my ( $name, $pass ) = @ARGV;
+
+plugin 'bcrypt';
+
+my $password = app->bcrypt($pass);
+
+my $config = plugin 'Config';
+my $db = $config->{db};
+
+my $dsn = sprintf 'dbi:%s:database=%s;host=%s;port=%d',
+    $db->{type}, $db->{name}, $db->{host}, $db->{port};
+
+my $schema = AuthHelper::Schema->connect( $dsn, $db->{user}, $db->{pass} );
+
+my $user = $schema->resultset('Account')->create(
+    {
+        name     => $name,
+        password => $password,
+        created  => DateTime->now(),
+    }
+);
