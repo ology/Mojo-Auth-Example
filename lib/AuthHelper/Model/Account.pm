@@ -1,9 +1,11 @@
 package AuthHelper::Model::Account;
 
+use Moo;
+
 use AuthHelper::Schema;
 
 sub search_by_name {
-    my ( $app, $user, $pass ) = @_;
+    my ( $self, $app, $user, $pass ) = @_;
 
     my $schema = _schema($app);
     my $result = $schema->resultset('Account')->search({ name => $user })->first;
