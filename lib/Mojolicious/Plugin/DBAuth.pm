@@ -2,7 +2,7 @@ package Mojolicious::Plugin::DBAuth;
 
 use Mojo::Base 'Mojolicious::Plugin';
 
-use AuthHelper::Schema;
+use AuthHelper::Model::Account;
 use Mojolicious::Plugin::Bcrypt;
 
 sub register {
@@ -11,26 +11,11 @@ sub register {
     $app->helper( auth => sub {
         my ($c) = @_;
 
-        my $schema = _schema($app);
-        my $result = $schema->resultset('Account')->search({ name => $c->param('username') })->first;
+        my $result = AuthHelper::Model::Account::search_by_name( $app, $c->param('username'), $c->param('password') );
 
         return 1
             if $result && $c->bcrypt_validate( $c->param('password'), $result->password );
     } );
-}
-
-sub _schema {
-    my ($app) = @_;
-
-    my $config = $app->plugin('Config');
-    my $db = $config->{db};
-
-    my $dsn = sprintf 'dbi:%s:database=%s;host=%s;port=%d',
-        $db->{type}, $db->{name}, $db->{host}, $db->{port};
-
-    my $schema = AuthHelper::Schema->connect( $dsn, $db->{user}, $db->{pass} );
-
-    return $schema;
 }
 
 1;
