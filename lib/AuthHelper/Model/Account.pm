@@ -5,7 +5,7 @@ use Moo;
 use AuthHelper::Schema;
 
 sub search_by_name {
-    my ( $self, $app, $user, $pass ) = @_;
+    my ( $self, $app, $user ) = @_;
 
     my $schema = _schema($app);
     my $result = $schema->resultset('Account')->search({ name => $user })->first;

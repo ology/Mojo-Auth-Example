@@ -12,7 +12,7 @@ sub register {
         my ($c) = @_;
 
         my $account = AuthHelper::Model::Account->new;
-        my $result = $account->search_by_name( $app, $c->param('username'), $c->param('password') );
+        my $result = $account->search_by_name( $app, $c->param('username') );
 
         return 1
             if $result && $c->bcrypt_validate( $c->param('password'), $result->password );
