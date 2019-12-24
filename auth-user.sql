@@ -1,7 +1,7 @@
 CREATE TABLE account (
     id SERIAL,
-    name character varying(255) NOT NULL,
-    password character varying(255) NOT NULL,
+    name text NOT NULL,
+    password text NOT NULL,
     created timestamp with time zone
 );
 
