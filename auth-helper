@@ -10,8 +10,10 @@ get '/' => sub { shift->render('login') };
 
 under sub {
     my ($self) = @_;
+
     return 1
         if $self->auth();
+
     $self->render( text => 'Denied!' );
     return 0;
 };
