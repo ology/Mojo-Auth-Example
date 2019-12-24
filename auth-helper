@@ -5,7 +5,7 @@ use Mojolicious::Lite;
 use lib 'lib';
 
 plugin 'DBAuth';
-plugin 'bcrypt';  # Used in Mojolicious::Plugin::DBAuth
+plugin 'bcrypt';  # Used in DBAuth
 
 get '/' => sub { shift->render('login') };
 
