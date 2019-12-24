@@ -12,7 +12,7 @@ sub register {
         my ($c) = @_;
 
         my $schema = _schema($app);
-        my $result = $schema->resultset('Account')->search({ name => $c->param('username') })->single;
+        my $result = $schema->resultset('Account')->search({ name => $c->param('username') })->first;
 
         return 1
             if $result && $c->bcrypt_validate( $c->param('password'), $result->password );
