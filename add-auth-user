@@ -3,7 +3,6 @@ use Mojolicious::Lite;
 
 use lib 'lib';
 use AuthHelper::Schema;
-use DateTime;
 use Mojolicious::Plugin::Bcrypt;
 
 my ( $name, $pass ) = @ARGV;
@@ -24,6 +23,5 @@ my $user = $schema->resultset('Account')->create(
     {
         name     => $name,
         password => $password,
-        created  => DateTime->now(),
     }
 );
