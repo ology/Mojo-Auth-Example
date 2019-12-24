@@ -3,7 +3,6 @@ use Mojolicious::Lite;
 
 use lib 'lib';
 
-#plugin 'MyAuth';
 plugin 'DBAuth';
 plugin 'bcrypt';  # Used in Mojolicious::Plugin::DBAuth
 
@@ -12,8 +11,7 @@ get '/' => sub { shift->render('login') };
 under sub {
     my ($self) = @_;
     return 1
-#        if $self->auth( 'gene', 'abc123' );     # MyAuth
-        if $self->auth();                       # DBAuth
+        if $self->auth();
     $self->render( text => 'Denied!' );
     return 0;
 };
