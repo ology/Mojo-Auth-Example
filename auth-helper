@@ -12,7 +12,7 @@ get '/' => sub { shift->render('login') };
 under sub {
     my ($self) = @_;
     return 1
-#        if $self->auth( 'gene', 'abc123' );    # MyAuth
+#        if $self->auth( 'gene', 'abc123' );     # MyAuth
         if $self->auth();                       # DBAuth
     $self->render( text => 'Denied!' );
     return 0;
