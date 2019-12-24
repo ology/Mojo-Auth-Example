@@ -18,7 +18,7 @@ under sub {
     return 0;
 };
 
-post '/authcorp' => sub { shift->render( text => 'Welcome!' ) };
+post '/auth' => sub { shift->render( text => 'Welcome!' ) };
 
 app->start;
 
@@ -26,7 +26,7 @@ __DATA__
 
 @@login.html.ep
 %= tag h1 => 'Login'
-%= form_for '/authcorp' => (method => 'post') => begin
+%= form_for '/auth' => (method => 'post') => begin
     Username: <%= text_field 'username' %>
     Password: <%= password_field 'password' %>
     %= submit_button 'Login'
