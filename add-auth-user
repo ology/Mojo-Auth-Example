@@ -19,9 +19,4 @@ my $dsn = sprintf 'dbi:%s:database=%s;host=%s;port=%d',
 
 my $schema = AuthHelper::Schema->connect( $dsn, $db->{user}, $db->{pass} );
 
-$schema->resultset('Account')->create(
-    {
-        name     => $name,
-        password => $password,
-    }
-);
+$schema->resultset('Account')->create({ name => $name, password => $password });
