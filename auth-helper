@@ -7,7 +7,7 @@ use lib 'lib';
 plugin 'DBAuth';
 plugin 'bcrypt';  # Used in DBAuth
 
-get '/' => sub { shift->render('login') };
+get '/' => sub { shift->render } => 'index';
 
 under sub {
     my ($self) = @_;
@@ -25,7 +25,7 @@ app->start;
 
 __DATA__
 
-@@login.html.ep
+@@index.html.ep
 %= tag h1 => 'Login'
 %= form_for '/auth' => (method => 'post') => begin
     Username: <%= text_field 'username' %>
