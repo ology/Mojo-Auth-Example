@@ -9,17 +9,40 @@ plugin 'bcrypt';  # Used in DBAuth
 
 get '/' => sub { shift->render } => 'index';
 
+post '/login' => sub {
+    my $self = shift;
+
+    if ( $self->auth ) {
+        $self->session( auth => 1 );
+        return $self->redirect_to('auth');
+    }
+
+    $self->flash( error => 'Invalid' );
+    $self->redirect_to('index');
+} => 'login';
+
+get '/logout' => sub {
+    my $self = shift;
+
+    delete $self->session->{auth};
+
+    $self->redirect_to('index');
+} => 'logout';
+
+
 under sub {
     my ($self) = @_;
 
+    my $session = $self->session('auth') // '';
+
     return 1
-        if $self->auth();
+        if $session eq '1';
 
     $self->render( text => 'Denied!' );
     return 0;
 };
 
-post '/auth' => sub { shift->render( text => 'Welcome!' ) };
+get '/auth' => sub { shift->render( text => 'Welcome!' ) };
 
 app->start;
 
@@ -27,7 +50,10 @@ __DATA__
 
 @@index.html.ep
 %= tag h1 => 'Login'
-%= form_for '/auth' => (method => 'post') => begin
+% if ( flash('error') ) {
+  <h2 style="color:red"><%= flash('error') %></h2>
+% }
+%= form_for login => (method => 'post') => begin
     Username: <%= text_field 'username' %>
     Password: <%= password_field 'password' %>
     %= submit_button 'Login'
