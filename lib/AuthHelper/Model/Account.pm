@@ -1,6 +1,7 @@
 package AuthHelper::Model::Account;
 
 use Moo;
+use strictures 2;
 
 use AuthHelper::Schema;
 
