@@ -29,7 +29,6 @@ get '/logout' => sub {
     $self->redirect_to('index');
 } => 'logout';
 
-
 under sub {
     my ($self) = @_;
 
