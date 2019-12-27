@@ -11,8 +11,15 @@ sub register {
     $app->helper( auth => sub {
         my ($c) = @_;
 
-        my $account = AuthHelper::Model::Account->new;
-        my $result = $account->search_by_name( $app, $c->param('username') );
+        return 0
+            unless $c->param('username');
+
+        my $account = AuthHelper::Model::Account->new(
+            app  => $app,
+            name => $c->param('username'),
+        );
+
+        my $result = $account->search_by_name();
 
         return 1
             if $result && $c->bcrypt_validate( $c->param('password'), $result->password );

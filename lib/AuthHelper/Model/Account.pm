@@ -4,19 +4,27 @@ use Moo;
 
 use AuthHelper::Schema;
 
-sub search_by_name {
-    my ( $self, $app, $user ) = @_;
+has app => (
+    is => 'ro',
+);
 
-    my $schema = _schema($app);
-    my $result = $schema->resultset('Account')->search({ name => $user })->first;
+has name => (
+    is => 'ro',
+);
+
+sub search_by_name {
+    my ($self) = @_;
+
+    my $schema = $self->_schema();
+    my $result = $schema->resultset('Account')->search({ name => $self->name })->first;
 
     return $result;
 }
 
 sub _schema {
-    my ($app) = @_;
+    my ($self) = @_;
 
-    my $config = $app->plugin('Config');
+    my $config = $self->app->plugin('Config');
     my $db = $config->{db};
 
     my $dsn;
