@@ -17,7 +17,7 @@ post '/login' => sub {
         return $self->redirect_to('auth');
     }
 
-    $self->flash( error => 'Invalid' );
+    $self->flash( error => 'Invalid login' );
     $self->redirect_to('index');
 } => 'login';
 
