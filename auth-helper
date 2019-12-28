@@ -68,8 +68,10 @@ __DATA__
     %= tag h2 => (style => 'color:red') => flash('error')
 % }
 %= form_for login => (method => 'post') => begin
-    Username: <%= text_field 'username' %>
-    Password: <%= password_field 'password' %>
+    %= label_for username => 'Username:'
+    %= text_field 'username'
+    %= label_for password => 'Password:'
+    %= password_field 'password'
     %= submit_button 'Login'
 %= end
 
@@ -83,8 +85,10 @@ __DATA__
 % }
 New user:
 %= form_for add => (method => 'post') => begin
-    Username: <%= text_field 'username' %>
-    Password: <%= password_field 'password' %>
+    %= label_for username => 'Username:'
+    %= text_field 'username'
+    %= label_for password => 'Password:'
+    %= password_field 'password'
     %= submit_button 'Add'
 %= end
 %= link_to Logout => 'logout'
