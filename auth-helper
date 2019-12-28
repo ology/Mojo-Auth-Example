@@ -49,11 +49,13 @@ post '/add' => sub {
     my $result = $self->add();
 
     if ( $result ) {
-        $self->render( text => 'User added' )
+        $self->flash( message => 'User added' )
     }
     else {
-        $self->render( text => 'Cannot add user!' )
+        $self->flash( error => 'Cannot add user!' )
     }
+
+    $self->redirect_to('auth');
 };
 
 app->start;
@@ -75,6 +77,9 @@ __DATA__
 %= tag h1 => 'Authorized'
 % if ( flash('error') ) {
   <h2 style="color:red"><%= flash('error') %></h2>
+% }
+% if ( flash('message') ) {
+  <h2 style="color:green"><%= flash('message') %></h2>
 % }
 New user:
 %= form_for add => (method => 'post') => begin
