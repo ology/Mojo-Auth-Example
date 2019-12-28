@@ -62,16 +62,19 @@ app->start;
 
 __DATA__
 
+@@_credentials.html.ep
+    %= label_for username => 'Username:'
+    %= text_field 'username'
+    %= label_for password => 'Password:'
+    %= password_field 'password'
+
 @@index.html.ep
 %= tag h1 => 'Login'
 % if ( flash('error') ) {
     %= tag h2 => (style => 'color:red') => flash('error')
 % }
 %= form_for login => (method => 'post') => begin
-    %= label_for username => 'Username:'
-    %= text_field 'username'
-    %= label_for password => 'Password:'
-    %= password_field 'password'
+    %= include '_credentials'
     %= submit_button 'Login'
 %= end
 
@@ -85,10 +88,7 @@ __DATA__
 % }
 New user:
 %= form_for add => (method => 'post') => begin
-    %= label_for username => 'Username:'
-    %= text_field 'username'
-    %= label_for password => 'Password:'
-    %= password_field 'password'
+    %= include '_credentials'
     %= submit_button 'Add'
 %= end
 %= link_to Logout => 'logout'
