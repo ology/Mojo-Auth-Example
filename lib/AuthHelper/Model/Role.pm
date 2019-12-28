@@ -8,19 +8,17 @@ use AuthHelper::Schema;
 sub schema {
     my ($self) = @_;
 
-    my $config = $self->app->plugin('Config');
-    my $db = $config->{db};
-
     my $dsn;
-    if ( $db->{type} eq 'SQLite' ) {
-        $dsn = sprintf 'dbi:%s:dbname=%s', $db->{type}, $db->{name};
+
+    if ( $self->conf->{type} eq 'SQLite' ) {
+        $dsn = sprintf 'dbi:%s:dbname=%s', $self->conf->{type}, $self->conf->{name};
     }
     else {
         $dsn = sprintf 'dbi:%s:database=%s;host=%s;port=%d',
-            $db->{type}, $db->{name}, $db->{host}, $db->{port};
+            $self->conf->{type}, $self->conf->{name}, $self->conf->{host}, $self->conf->{port};
     }
 
-    my $schema = AuthHelper::Schema->connect( $dsn, $db->{user}, $db->{pass} );
+    my $schema = AuthHelper::Schema->connect( $dsn, $self->conf->{user}, $self->conf->{pass} );
 
     return $schema;
 }

@@ -8,6 +8,8 @@ use Mojolicious::Plugin::Bcrypt;
 sub register {
     my ( $self, $app ) = @_;
 
+    my $config = $app->plugin('Config');
+
     $app->helper( auth => sub {
         my ($c) = @_;
 
@@ -15,7 +17,7 @@ sub register {
             unless $c->param('username');
 
         my $account = AuthHelper::Model::Account->new(
-            app  => $app,
+            conf => $config->{db},
             name => $c->param('username'),
         );
 
@@ -32,7 +34,7 @@ sub register {
             unless $c->param('username') && $c->param('password');
 
         my $account = AuthHelper::Model::Account->new(
-            app      => $app,
+            conf     => $config->{db},
             name     => $c->param('username'),
             password => $c->bcrypt( $c->param('password') ),
         );

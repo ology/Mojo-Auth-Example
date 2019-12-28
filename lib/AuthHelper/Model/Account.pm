@@ -7,7 +7,7 @@ with('AuthHelper::Model::Role');
 
 use AuthHelper::Schema;
 
-has app => (
+has conf => (
     is => 'ro',
 );
 
