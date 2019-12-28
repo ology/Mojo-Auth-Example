@@ -10,7 +10,7 @@ plugin 'bcrypt';  # Used in DBAuth
 get '/' => sub { shift->render } => 'index';
 
 post '/login' => sub {
-    my $self = shift;
+    my ($self) = @_;
 
     if ( $self->auth ) {
         $self->session( auth => 1 );
@@ -22,7 +22,7 @@ post '/login' => sub {
 } => 'login';
 
 get '/logout' => sub {
-    my $self = shift;
+    my ($self) = @_;
 
     delete $self->session->{auth};
 
