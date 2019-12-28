@@ -24,6 +24,24 @@ sub register {
         return 1
             if $result && $c->bcrypt_validate( $c->param('password'), $result->password );
     } );
+
+    $app->helper( add => sub {
+        my ($c) = @_;
+
+        return 0
+            unless $c->param('username') && $c->param('password');
+
+        my $account = AuthHelper::Model::Account->new(
+            app      => $app,
+            name     => $c->param('username'),
+            password => $c->bcrypt( $c->param('password') ),
+        );
+
+        my $result = $account->create();
+
+        return $result ? 1 : 0;
+    } );
+
 }
 
 1;

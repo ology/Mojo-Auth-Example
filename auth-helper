@@ -41,7 +41,20 @@ under sub {
     return 0;
 };
 
-get '/auth' => sub { shift->render( text => 'Welcome!' ) };
+get '/auth' => sub { shift->render } => 'auth';
+
+post '/add' => sub {
+    my ($self) = @_;
+
+    my $result = $self->add();
+
+    if ( $result ) {
+        $self->render( text => 'User added' )
+    }
+    else {
+        $self->render( text => 'Cannot add user!' )
+    }
+};
 
 app->start;
 
@@ -57,3 +70,16 @@ __DATA__
     Password: <%= password_field 'password' %>
     %= submit_button 'Login'
 %= end
+
+@@auth.html.ep
+%= tag h1 => 'Authorized'
+% if ( flash('error') ) {
+  <h2 style="color:red"><%= flash('error') %></h2>
+% }
+New user:
+%= form_for add => (method => 'post') => begin
+    Username: <%= text_field 'username' %>
+    Password: <%= password_field 'password' %>
+    %= submit_button 'Add'
+%= end
+<a href="<%= url_for('logout') %>">logout</a>

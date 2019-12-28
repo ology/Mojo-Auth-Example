@@ -15,11 +15,29 @@ has name => (
     is => 'ro',
 );
 
+has password => (
+    is => 'ro',
+);
+
 sub search_by_name {
     my ($self) = @_;
 
     my $schema = $self->schema();
     my $result = $schema->resultset('Account')->search({ name => $self->name })->first;
+
+    return $result;
+}
+
+sub create {
+    my ($self) = @_;
+
+    my $schema = $self->schema();
+    my $result = $schema->resultset('Account')->create(
+        {
+            name     => $self->name,
+            password => $self->password,
+        }
+    );
 
     return $result;
 }
