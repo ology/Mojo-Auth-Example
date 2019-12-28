@@ -3,6 +3,8 @@ package AuthHelper::Model::Role;
 use Moo::Role;
 use strictures 2;
 
+use AuthHelper::Schema;
+
 sub schema {
     my ($self) = @_;
 
