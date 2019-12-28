@@ -7,7 +7,7 @@ use lib 'lib';
 app->secrets(['I am the walrus.']);
 
 plugin 'DBAuth';
-plugin 'bcrypt';  # Used in DBAuth
+plugin 'bcrypt';
 
 get '/' => sub { shift->render } => 'index';
 
