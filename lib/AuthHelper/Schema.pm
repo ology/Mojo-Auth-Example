@@ -7,7 +7,7 @@ package AuthHelper::Schema;
 use strict;
 use warnings;
 
-use base 'DBIx::Class::Schema';
+use base 'DBIx::Class::Schema::Config';
 
 __PACKAGE__->load_namespaces;
 

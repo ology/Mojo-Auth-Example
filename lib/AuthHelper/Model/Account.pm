@@ -3,13 +3,7 @@ package AuthHelper::Model::Account;
 use Moo;
 use strictures 2;
 
-with('AuthHelper::Model::Role');
-
 use AuthHelper::Schema;
-
-has conf => (
-    is => 'ro',
-);
 
 has schema => (
     is      => 'ro',
@@ -18,7 +12,7 @@ has schema => (
 
 sub _build_schema {
     my ($self) = @_;
-    return $self->_schema();
+    return AuthHelper::Schema->connect('auth');
 }
 
 has name => (

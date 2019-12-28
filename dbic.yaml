@@ -1,0 +1,5 @@
+auth:
+    dsn: 'dbi:Pg:host=localhost;database=auth;port=5432'
+    user: 'gene'
+    password: ''
+    TraceLevel: 1
