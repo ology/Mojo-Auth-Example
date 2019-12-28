@@ -11,12 +11,6 @@ plugin 'bcrypt';
 
 my $password = app->bcrypt($pass);
 
-my $config = plugin Config => { file => 'auth-helper.conf' };
-my $db = $config->{db};
-
-my $dsn = sprintf 'dbi:%s:database=%s;host=%s;port=%d',
-    $db->{type}, $db->{name}, $db->{host}, $db->{port};
-
-my $schema = AuthHelper::Schema->connect( $dsn, $db->{user}, $db->{pass} );
+my $schema = AuthHelper::Schema->connect('auth');
 
 $schema->resultset('Account')->create({ name => $name, password => $password });
