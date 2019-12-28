@@ -11,6 +11,16 @@ has conf => (
     is => 'ro',
 );
 
+has schema => (
+    is      => 'ro',
+    builder => 1,
+);
+
+sub _build_schema {
+    my ($self) = @_;
+    return $self->_schema();
+}
+
 has name => (
     is => 'ro',
 );
@@ -22,8 +32,7 @@ has password => (
 sub search_by_name {
     my ($self) = @_;
 
-    my $schema = $self->schema();
-    my $result = $schema->resultset('Account')->search({ name => $self->name })->first;
+    my $result = $self->schema->resultset('Account')->search({ name => $self->name })->first;
 
     return $result;
 }
@@ -31,8 +40,7 @@ sub search_by_name {
 sub create {
     my ($self) = @_;
 
-    my $schema = $self->schema();
-    my $result = $schema->resultset('Account')->create(
+    my $result = $self->schema->resultset('Account')->create(
         {
             name     => $self->name,
             password => $self->password,

@@ -5,7 +5,7 @@ use strictures 2;
 
 use AuthHelper::Schema;
 
-sub schema {
+sub _schema {
     my ($self) = @_;
 
     my $dsn;
