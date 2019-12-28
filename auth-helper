@@ -65,7 +65,7 @@ __DATA__
 @@index.html.ep
 %= tag h1 => 'Login'
 % if ( flash('error') ) {
-  <h2 style="color:red"><%= flash('error') %></h2>
+    %= tag h2 => (style => 'color:red') => flash('error')
 % }
 %= form_for login => (method => 'post') => begin
     Username: <%= text_field 'username' %>
@@ -76,10 +76,10 @@ __DATA__
 @@auth.html.ep
 %= tag h1 => 'Authorized'
 % if ( flash('error') ) {
-  <h2 style="color:red"><%= flash('error') %></h2>
+    %= tag h2 => (style => 'color:red') => flash('error')
 % }
 % if ( flash('message') ) {
-  <h2 style="color:green"><%= flash('message') %></h2>
+    %= tag h2 => (style => 'color:green') => flash('message')
 % }
 New user:
 %= form_for add => (method => 'post') => begin
