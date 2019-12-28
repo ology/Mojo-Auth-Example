@@ -11,9 +11,6 @@ sub register {
     $app->helper( auth => sub {
         my ($c) = @_;
 
-        return 0
-            unless $c->param('username');
-
         my $account = AuthHelper::Model::Account->new(
             name => $c->param('username'),
         );
