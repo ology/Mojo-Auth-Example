@@ -82,4 +82,4 @@ New user:
     Password: <%= password_field 'password' %>
     %= submit_button 'Add'
 %= end
-<a href="<%= url_for('logout') %>">logout</a>
+%= link_to Logout => 'logout'
