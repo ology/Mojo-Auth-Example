@@ -14,7 +14,7 @@ L<DBIx::Class>.
 
 use Mojolicious::Lite;
 
-our $VERSION = '0.001';
+our $VERSION = '0.001000';
 
 use lib 'lib';
 
