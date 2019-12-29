@@ -1,6 +1,20 @@
 #!/usr/bin/env perl
 
+=head1 NAME
+
+auth-helper
+
+=head1 DESCRIPTION
+
+This is a L<Mojolicious::Lite> app that enables login/out and new
+account creation with L<Mojolicious::Plugin::Bcrypt> through
+L<DBIx::Class>.
+
+=cut
+
 use Mojolicious::Lite;
+
+our $VERSION = '0.001';
 
 use lib 'lib';
 
@@ -9,7 +23,17 @@ app->secrets(['I am the walrus.']);
 plugin 'DBAuth';
 plugin 'bcrypt';
 
+=head1 ROUTES
+
+=head2 /
+
+=cut
+
 get '/' => sub { shift->render } => 'index';
+
+=head2 /login
+
+=cut
 
 post '/login' => sub {
     my ($self) = @_;
@@ -22,6 +46,10 @@ post '/login' => sub {
     $self->flash( error => 'Invalid login' );
     $self->redirect_to('index');
 } => 'login';
+
+=head2 /logout
+
+=cut
 
 get '/logout' => sub {
     my ($self) = @_;
@@ -43,7 +71,19 @@ under sub {
     return 0;
 };
 
+=head2 /auth
+
+Only alowed after valid login.
+
+=cut
+
 get '/auth' => sub { shift->render } => 'auth';
+
+=head2 /add
+
+Add new user.
+
+=cut
 
 post '/add' => sub {
     my ($self) = @_;
