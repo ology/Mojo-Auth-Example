@@ -2,8 +2,6 @@ package Mojolicious::Plugin::DBAuth;
 
 use Mojo::Base 'Mojolicious::Plugin';
 
-use Mojolicious::Plugin::Bcrypt;
-
 use AuthHelper::Schema;
 
 sub register {
