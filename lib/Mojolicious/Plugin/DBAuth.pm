@@ -12,7 +12,7 @@ sub register {
     $app->helper( schema => sub {
         my ($c) = @_;
 
-        my $schema = AuthHelper::Schema->connect('auth');
+        my $schema = AuthHelper::Schema->connect( $c->config('database') );
 
         return $schema;
     } );
