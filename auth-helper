@@ -12,9 +12,11 @@ L<DBIx::Class>.
 
 =cut
 
-use Mojolicious::Lite;
-
 our $VERSION = '0.001000';
+
+use v5.10.0;
+
+use Mojolicious::Lite;
 
 use lib 'lib';
 
