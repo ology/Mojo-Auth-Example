@@ -28,13 +28,13 @@ plugin 'bcrypt';
 
 =head1 PUBLIC ROUTES
 
-=head2 /
+=head2 GET /
 
 =cut
 
 get '/' => sub { shift->render } => 'index';
 
-=head2 /login
+=head2 GET /login
 
 =cut
 
@@ -50,7 +50,7 @@ post '/login' => sub {
     $self->redirect_to('index');
 } => 'login';
 
-=head2 /logout
+=head2 GET /logout
 
 =cut
 
@@ -76,7 +76,7 @@ under sub {
 
 =head1 AUTHORIZED ROUTES
 
-=head2 /auth
+=head2 GET /auth
 
 =cut
 
@@ -88,7 +88,7 @@ get '/auth' => sub {
     $self->render( accounts => $accounts );
 } => 'auth';
 
-=head2 /add
+=head2 POST /add
 
 Add new user.
 
