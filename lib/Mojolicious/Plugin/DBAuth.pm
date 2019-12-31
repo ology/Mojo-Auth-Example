@@ -43,16 +43,7 @@ sub register {
 
         my $result = $c->schema->resultset('Account');
 
-        my $accounts;
-        while ( my $r = $result->next ) {
-            push @$accounts, {
-                id      => $r->id,
-                name    => $r->name,
-                created => $r->created,
-            };
-        }
-
-        return $accounts;
+        return $result;
     } );
 
 }

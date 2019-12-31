@@ -156,8 +156,8 @@ New user:
     %= include '_credentials'
     %= submit_button 'Add'
 %= end
-% for my $account ( @$accounts ) {
-    <%= $account->{id} %>: <%= $account->{name} %> - <%= $account->{created} %>
+% while ( my $account = $accounts->next ) {
+    <%= $account->id %>: <%= $account->name %> - <%= $account->created %>
     %= tag 'br'
 % }
 %= tag 'p'
