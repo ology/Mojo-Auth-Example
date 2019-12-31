@@ -156,9 +156,11 @@ New user:
     %= include '_credentials'
     %= submit_button 'Add'
 %= end
-% while ( my $account = $accounts->next ) {
+% if ( $accounts ) {
+    % while ( my $account = $accounts->next ) {
     <%= $account->id %>: <%= $account->name %> - <%= $account->created %>
     %= tag 'br'
+    % }
 % }
 %= tag 'p'
 %= link_to Logout => 'logout'
