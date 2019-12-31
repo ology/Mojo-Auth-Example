@@ -1,9 +1,9 @@
 #!/usr/bin/env perl
-use Mojolicious::Lite;
 
 use lib 'lib';
 use AuthHelper::Schema;
-use Mojolicious::Plugin::Bcrypt;
+
+use Mojolicious::Lite;
 
 my ( $name, $pass ) = @ARGV;
 
