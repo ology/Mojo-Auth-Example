@@ -80,7 +80,13 @@ under sub {
 
 =cut
 
-get '/auth' => sub { shift->render } => 'auth';
+get '/auth' => sub {
+    my ($self) = @_;
+
+    my $accounts = $self->accounts;
+
+    $self->render( accounts => $accounts );
+} => 'auth';
 
 =head2 /add
 
@@ -150,4 +156,9 @@ New user:
     %= include '_credentials'
     %= submit_button 'Add'
 %= end
+% for my $account ( @$accounts ) {
+    <%= $account->{id} %>: <%= $account->{name} %> - <%= $account->{created} %>
+    %= tag 'br'
+% }
+%= tag 'p'
 %= link_to Logout => 'logout'

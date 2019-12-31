@@ -38,6 +38,23 @@ sub register {
         return $result;
     } );
 
+    $app->helper( accounts => sub {
+        my ($c) = @_;
+
+        my $result = $c->schema->resultset('Account');
+
+        my $accounts;
+        while ( my $r = $result->next ) {
+            push @$accounts, {
+                id      => $r->id,
+                name    => $r->name,
+                created => $r->created,
+            };
+        }
+
+        return $accounts;
+    } );
+
 }
 
 1;
