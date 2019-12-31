@@ -108,10 +108,10 @@ post '/add' => sub {
     my $result = $self->add();
 
     if ( $result ) {
-        $self->flash( message => 'User added' )
+        $self->flash( message => 'User added' );
     }
     else {
-        $self->flash( error => 'Cannot add user!' )
+        $self->flash( error => 'Cannot add user!' );
     }
 
     $self->redirect_to('auth');
