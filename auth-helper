@@ -23,8 +23,8 @@ use lib 'lib';
 app->secrets(['I am the walrus.']);
 
 plugin 'Config';
-plugin 'DBAuth';
 plugin 'bcrypt';
+plugin 'AuthHelper::DBAuth';
 
 =head1 PUBLIC ROUTES
 
