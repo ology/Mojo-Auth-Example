@@ -2,7 +2,6 @@ use Mojo::Base -strict;
 use Test::More;
 use Test::Mojo::Session;
 use Mojo::File qw( path );
-use Data::Dumper;
 
 my $t = Test::Mojo::Session->new( path('auth-helper') );
 
