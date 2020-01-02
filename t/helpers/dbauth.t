@@ -8,7 +8,7 @@ my $t = Test::Mojo->new( path('auth-helper') );
 
 isa_ok $t->app->schema, 'AuthHelper::Schema';
 
-is $t->app->auth( 'gene', 'abc123' ), '1', 'auth';
+is $t->app->auth( 'foo', 'abc123' ), '1', 'auth';
 
 isa_ok $t->app->add( 'test-' . time(), 'foo' ), 'AuthHelper::Schema::Result::Account';
 

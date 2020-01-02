@@ -16,7 +16,7 @@ $t->get_ok('/')
   ->element_exists('form input[type="submit"]');
 
 # Test login with valid credentials
-$t->post_ok('/login' => form => {username => 'gene', password => 'abc123'})
+$t->post_ok('/login' => form => {username => 'foo', password => 'abc123'})
   ->status_is(200)
   ->session_ok
   ->session_has('/auth')
