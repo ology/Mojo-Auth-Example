@@ -8,6 +8,8 @@ my $t = Test::Mojo::Session->new( path('auth-helper') );
 
 my $config = $t->app->config;
 
+isa_ok $config, 'HASH';
+
 # Allow 302 redirect responses
 $t->ua->max_redirects(1);
 

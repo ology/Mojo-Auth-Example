@@ -7,6 +7,8 @@ my $t = Test::Mojo->new( path('auth-helper') );
 
 my $config = $t->app->config;
 
+isa_ok $config, 'HASH';
+
 isa_ok $t->app->schema, 'AuthHelper::Schema';
 
 is $t->app->auth( $config->{test_user}, $config->{test_pass} ), '1', 'auth';
