@@ -33,6 +33,7 @@ $t->get_ok('/auth')
 # Test if HTML login form shows up again after logout
 $t->get_ok('/logout')
   ->status_is(200)
+  ->session_hasnt('/auth')
   ->element_exists('form input[name="username"]')
   ->element_exists('form input[name="password"]')
   ->element_exists('form input[type="submit"]');
