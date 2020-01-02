@@ -1,6 +1,8 @@
 # Mojolicious Authorization Example
 Simplistic, Mojolicious::Lite + DBIx::Class + Bcrypt user authorization example
 
+Postres instructions:
+
 > createdb auth
 
 > psql auth < auth-helper.sql
