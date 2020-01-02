@@ -20,7 +20,6 @@ $t->get_ok('/')
 $t->post_ok('/login' => form => {username => 'foo', password => 'abc123'})
   ->status_is(200)
   ->session_ok
-  ->session_has('/auth')
   ->session_is('/auth' => '1')
   ->or(sub { diag Dumper $t->tx->res->json });
 
