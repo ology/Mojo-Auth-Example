@@ -9,6 +9,6 @@ Postgres instructions:
 
 > perl bin/add-auth-user foo abc123
 
-> prove -lr t
+> prove -l t
 
 > http://127.0.0.1:3000 
