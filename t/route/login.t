@@ -21,7 +21,7 @@ $t->post_ok('/login' => form => {username => 'gene', password => 'abc123'})
   ->session_ok
   ->session_has('/auth')
   ->session_is('/auth' => '1')
-  ->or(sub { diag Dumper $t->tx->res });
+  ->or(sub { diag Dumper $t->tx->res->json });
 
 # Test accessing a protected page
 $t->get_ok('/auth')
