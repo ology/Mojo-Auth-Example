@@ -20,9 +20,10 @@ use Mojolicious::Lite;
 
 use lib 'lib';
 
-app->secrets(['I am the walrus.']);
-
 plugin 'Config';
+
+app->secrets( app->config->{secrets} );
+
 plugin 'bcrypt';
 plugin 'AuthHelper::DBAuth';
 
