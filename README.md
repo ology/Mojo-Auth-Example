@@ -15,7 +15,7 @@ Instructions:
 
 > psql auth < auth-helper.sql  # Postgres
 
-> perl bin/add-auth-user foo abc123
+> perl add-auth-user foo abc123
 
 > prove -l t
 
