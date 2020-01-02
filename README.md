@@ -3,7 +3,7 @@ Simplistic, Mojolicious::Lite + DBIx::Class + Bcrypt user authorization example
 
 Postgres instructions:
 
-> Fix the user and password in dbic.yaml
+> Fix the dsn, user and password in dbic.yaml
 
 > createdb auth
 
