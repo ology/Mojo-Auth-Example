@@ -1,7 +1,9 @@
 # Mojolicious Authorization Example
 Simplistic, Mojolicious::Lite + DBIx::Class + Bcrypt user authorization example
 
-Postgres instructions:
+Instructions:
+
+> git clone https://github.com/ology/Mojo-Auth-Example.git
 
 > perl Makefile.PL
 
@@ -9,9 +11,9 @@ Postgres instructions:
 
 > Fix the user and password in dbic.yaml
 
-> createdb auth
+> createdb auth  # Postgres
 
-> psql auth < auth-helper.sql
+> psql auth < auth-helper.sql  # Postgres
 
 > perl bin/add-auth-user foo abc123
 
