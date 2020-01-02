@@ -6,6 +6,8 @@ use Data::Dumper;
 
 my $t = Test::Mojo::Session->new( path('auth-helper') );
 
+my $config = $t->app->config;
+
 # Allow 302 redirect responses
 $t->ua->max_redirects(1);
 
@@ -17,7 +19,7 @@ $t->get_ok('/')
   ->element_exists('form input[type="submit"]');
 
 # Test login with valid credentials
-$t->post_ok('/login' => form => {username => 'foo', password => 'abc123'})
+$t->post_ok('/login' => form => { username => $config->{test_user}, password => $config->{test_pass} })
   ->status_is(200)
   ->session_ok
   ->session_is('/auth' => '1');

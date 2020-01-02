@@ -5,11 +5,13 @@ use Mojo::File qw( path );
 
 my $t = Test::Mojo->new( path('auth-helper') );
 
+my $config = $t->app->config;
+
 isa_ok $t->app->schema, 'AuthHelper::Schema';
 
-is $t->app->auth( 'foo', 'abc123' ), '1', 'auth';
+is $t->app->auth( $config->{test_user}, $config->{test_pass} ), '1', 'auth';
 
-isa_ok $t->app->add( 'test-' . time(), 'foo' ), 'AuthHelper::Schema::Result::Account';
+isa_ok $t->app->add( 'test-' . time(), $config->{test_pass} ), 'AuthHelper::Schema::Result::Account';
 
 isa_ok $t->app->accounts, 'AuthHelper::Schema::ResultSet::Account';
 
