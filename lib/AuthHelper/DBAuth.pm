@@ -14,23 +14,23 @@ sub register {
     } );
 
     $app->helper( auth => sub {
-        my ($c) = @_;
+        my ( $c, $user, $pass ) = @_;
 
-        my $result = $c->schema->resultset('Account')->search_by_name( $c->param('username') );
+        my $result = $c->schema->resultset('Account')->search_by_name($user);
 
         return 1
-            if $result && $c->bcrypt_validate( $c->param('password'), $result->password );
+            if $result && $c->bcrypt_validate( $pass, $result->password );
     } );
 
     $app->helper( add => sub {
-        my ($c) = @_;
+        my ( $c, $user, $pass ) = @_;
 
         return 0
-            unless $c->param('username') && $c->param('password');
+            unless $user && $pass;
 
         my $result = $c->schema->resultset('Account')->create_new(
-            $c->param('username'),
-            $c->bcrypt( $c->param('password') )
+            $user,
+            $c->bcrypt($pass),
         );
 
         return $result;

@@ -46,7 +46,7 @@ Set session C<auth> if valid.
 post '/login' => sub {
     my ($self) = @_;
 
-    if ( $self->auth ) {
+    if ( $self->auth( $self->param('username'), $self->param('password') ) ) {
         $self->session( auth => 1 );
         return $self->redirect_to('auth');
     }
@@ -106,7 +106,7 @@ Add new user.
 post '/add' => sub {
     my ($self) = @_;
 
-    my $result = $self->add();
+    my $result = $self->add( $self->param('username'), $self->param('password') );
 
     if ( $result ) {
         $self->flash( message => 'User added' );
