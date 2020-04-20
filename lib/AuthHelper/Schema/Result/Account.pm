@@ -21,6 +21,14 @@ use base 'DBIx::Class::Core';
 
 __PACKAGE__->table("account");
 
+=head1 COMPONENTS
+
+EncodedColumn
+
+=cut
+
+__PACKAGE__->load_components(qw/ EncodedColumn /);
+
 =head1 ACCESSORS
 
 =head2 id
@@ -50,14 +58,18 @@ __PACKAGE__->table("account");
 =cut
 
 __PACKAGE__->add_columns(
-  "id",
-  { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "name",
-  { data_type => "varchar", is_nullable => 0, size => 255 },
-  "password",
-  { data_type => "varchar", is_nullable => 0, size => 255 },
-  "created",
-  {
+  id => { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
+  name => { data_type => "varchar", is_nullable => 0, size => 255 },
+  password => {
+    data_type => "varchar",
+    is_nullable => 0,
+    size => 255,
+    encode_column => 1,
+    encode_class => 'Crypt::Eksblowfish::Bcrypt',
+    encode_args => { key_nul => 0, cost => 6 },
+    encode_check_method => 'check_password',
+  },
+  created => {
     data_type => "datetime",
     datetime_undef_if_invalid => 1,
     is_nullable => 1,

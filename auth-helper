@@ -24,7 +24,6 @@ plugin 'Config';
 
 app->secrets( app->config->{secrets} );
 
-plugin 'bcrypt';
 plugin 'AuthHelper::DBAuth';
 
 =head1 PUBLIC ROUTES
@@ -75,7 +74,7 @@ under sub {
     my $session = $self->session('auth') // '';
 
     return 1
-        if $session eq '1';
+        if $session;
 
     $self->render( text => 'Denied!' );
     return 0;

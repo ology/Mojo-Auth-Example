@@ -16,10 +16,10 @@ sub register {
     $app->helper( auth => sub {
         my ( $c, $user, $pass ) = @_;
 
-        my $result = $c->schema->resultset('Account')->search_by_name($user);
+        my $result = $c->schema->resultset('Account')->search({ name => $user })->first;
 
         return 1
-            if $result && $c->bcrypt_validate( $pass, $result->password );
+            if $result && $result->check_password($pass);
     } );
 
     $app->helper( add => sub {
@@ -28,10 +28,7 @@ sub register {
         return 0
             unless $user && $pass;
 
-        my $result = $c->schema->resultset('Account')->create_new(
-            $user,
-            $c->bcrypt($pass),
-        );
+        my $result = $c->schema->resultset('Account')->create({ name => $user, password => $pass });
 
         return $result;
     } );
