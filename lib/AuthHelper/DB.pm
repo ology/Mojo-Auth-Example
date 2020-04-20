@@ -1,4 +1,4 @@
-package AuthHelper::DBAuth;
+package AuthHelper::DB;
 
 use Mojo::Base 'Mojolicious::Plugin';
 

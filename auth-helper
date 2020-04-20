@@ -24,7 +24,7 @@ plugin 'Config';
 
 app->secrets( app->config->{secrets} );
 
-plugin 'AuthHelper::DBAuth';
+plugin 'AuthHelper::DB';
 
 =head1 PUBLIC ROUTES
 
